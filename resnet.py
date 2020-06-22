@@ -100,14 +100,14 @@ def _residual_block(block_function, filters, repetitions, is_first_layer=False):
             init_strides = (1, 1)
             if i == 0 and not is_first_layer:
                 init_strides = (2, 2)
-            input = block_function(filters=filters, init_strides=init_strides,
-                                   is_first_block_of_first_layer=(is_first_layer and i == 0))(input)
+            input = block_function(filters=filters, init_strides = init_strides,
+                                   is_first_block_of_first_layer = (is_first_layer and i == 0))(input)
         return input
 
     return f
 
 
-def basic_block(filters, init_strides=(1, 1), is_first_block_of_first_layer=False):
+def basic_block(filters, init_strides = (1, 1), is_first_block_of_first_layer=False):
     """Basic 3 X 3 convolution blocks for use on resnets with layers <= 34.
     Follows improved proposed scheme in http://arxiv.org/pdf/1603.05027v2.pdf
     """
@@ -200,7 +200,7 @@ class ResnetBuilder(object):
         if len(input_shape) != 3:
             raise Exception("Input shape should be a tuple (nb_channels, nb_rows, nb_cols)")
 
-        # Permute dimension order if necessary
+
         if keras.backend.image_data_format() == 'tf': 
             input_shape = (input_shape[1], input_shape[2], input_shape[0])
 
